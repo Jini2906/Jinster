@@ -21,14 +21,12 @@ body {
   align-items:center;
   font-family:Arial;
 }
-
 #cover {
   width:80vw;
   max-width:320px;
   border-radius:22px;
   box-shadow:0 0 25px rgba(255,255,255,.2);
 }
-
 button {
   margin-top:30px;
   padding:18px 42px;
@@ -36,7 +34,6 @@ button {
   border-radius:40px;
   border:none;
 }
-
 #player {
   width:1px;
   height:1px;
@@ -47,7 +44,7 @@ button {
 
 <body>
 
-<img id="cover" src="img/tommyback.png">
+<img id="cover" src="img/back.png">
 <button id="play">▶ Abspielen</button>
 <div id="player"></div>
 
@@ -69,6 +66,8 @@ fetch("songs.json")
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
+    height: '1',
+    width: '1',
     playerVars: {
       controls:0,
       modestbranding:1,
@@ -78,14 +77,14 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
-document.getElementById("play").onclick = function(){
-  if(songId){
+document.getElementById("play").addEventListener("click", function(){
+  if(player && songId){
     player.loadVideoById(songId);
+  } else {
+    alert("Song nicht gefunden 😅");
   }
-};
+});
 </script>
 
 </body>
-
 </html>
-
